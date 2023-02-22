@@ -1,5 +1,5 @@
 import { StyleSheet, Pressable, Text, View, Image } from 'react-native';
-import { navigate } from '../../services/Services'
+import { navigate } from '../../services/main.service'
 
 export default function MainScreen({ navigation }: any) {
 

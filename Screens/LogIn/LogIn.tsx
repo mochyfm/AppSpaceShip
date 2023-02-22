@@ -7,20 +7,20 @@ import {
   View,
 } from "react-native";
 import { useState } from "react";
-import * as RootNavigation from "../../services/Services";
+import * as RootNavigation from "../../services/main.service";
 
 export function LogIn({ onLogin }: { onLogin: Function }) {
-  const [token, setToken] = useState<string>('');
+  const [token, setToken] = useState<string>("");
 
   const handleInput = (token: string): void => {
     setToken(token);
   };
 
-  const loginPress = () : void => {
-    if (token.trim() !== '') {
+  const handleSubmit = (): void => {
+    if (token.trim() !== "") {
       
     }
-  }
+  };
 
   return (
     <>
@@ -35,7 +35,7 @@ export function LogIn({ onLogin }: { onLogin: Function }) {
             onChangeText={handleInput}
             value={token}
           />
-          <Pressable style={styles.logButton} onPress={() => loginPress()}>
+          <Pressable style={styles.logButton} onPress={handleSubmit}>
             <Text style={styles.logButtonText}>Log In</Text>
           </Pressable>
         </View>

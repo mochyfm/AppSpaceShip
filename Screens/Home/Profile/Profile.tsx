@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { PilotData } from '../../../Types/Types';
-import { navigate } from '../../../services/Services';
+import { PilotProfile } from '../../../Types/Types';
+import { navigate } from '../../../services/main.service';
 
-export function Profile({ userData } : { userData ?: PilotData } ) {
+export function Profile({ userData } : { userData ?: PilotProfile } ) {
 
   return (
     <View>
@@ -12,9 +12,10 @@ export function Profile({ userData } : { userData ?: PilotData } ) {
             source={require('./assets/logo.jpg')}
             style={styles.profilePic}
           />
-          <Text style={styles.profileUsername}>Username</Text>
+          <Text style={styles.profileUsername}>{userData?.username}</Text>
         </View>
         <View style={styles.profileBody}>
+          <Text>Creditos: {userData?.credits} €</Text>
         </View>
       </View>
     </View>
