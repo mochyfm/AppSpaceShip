@@ -28,7 +28,7 @@ export async function claimUser(username: string) : Promise<PilotData | null> {
 }
 
 /* Tokens en drive */
-export async function getUserData(token: string) {
+export async function getUserData(token: string) : Promise<PilotData | null> {
   return await axios.get(`${API_MAIN_URL}/my/account/?token=${token}`)
   .then((response) => {
     if (response.data.error_message) console.log(response.data.error_message);

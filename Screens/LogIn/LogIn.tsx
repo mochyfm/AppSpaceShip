@@ -10,7 +10,7 @@ import { useState } from "react";
 import * as RootNavigation from "../../services/main.service";
 
 export function LogIn({ onLogin }: { onLogin: Function }) {
-  const [token, setToken] = useState<string>("5c3b0331-a91a-4743-b4b0-5c6f77dcfe89");
+  const [token, setToken] = useState<string>("22155370-f5e2-40bb-8e49-d733b1ab6d90");
 
   const handleInput = (token: string): void => {
     setToken(token);
@@ -18,7 +18,8 @@ export function LogIn({ onLogin }: { onLogin: Function }) {
 
   const handleSubmit = (): void => {
     if (token.trim() !== "") {
-      
+      onLogin(token)
+      setToken('')
     }
   };
 
