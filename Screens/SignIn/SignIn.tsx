@@ -1,5 +1,6 @@
 import { Image, Pressable, TextInput, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
+import { Palette } from '../../Themes/main.themes';
 
 export function SignIn({ onSignIn } : { onSignIn : Function }) {
   
@@ -48,7 +49,7 @@ export function SignIn({ onSignIn } : { onSignIn : Function }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: Palette.signInBackgroundColor,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -67,7 +68,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   infoMessage: {
-    color: '#000',
+    color: Palette.signInInfoMessage,
     fontSize: 23,
     fontWeight: 'bold',
     marginBottom: 30,
@@ -75,17 +76,18 @@ const styles = StyleSheet.create({
   },
   userInput: {
     alignSelf: 'center',
-    backgroundColor: '#FFF',
+    backgroundColor: Palette.signInBackgroundColor,
     borderRadius: 15,
-    borderColor: '#C2C2C2',
+    borderColor: Palette.inputBorderColor,
     borderWidth: 1,
     display: 'flex',
     padding: 15,
+    textAlign: 'center',
     width: '70%',
   },
   signButton: {
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: Palette.signInButtonBackgroundColor,
     borderRadius: 15,
     display: 'flex',
     marginTop: 50,
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     width: '70%',
   },
   signButtonText: {
-    color: '#FFF',
+    color: Palette.signInButtonFontColor,
   },
 });
 

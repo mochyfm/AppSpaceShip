@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import * as RootNavigation from "../../services/main.service";
+import { Palette } from "../../Themes/main.themes";
 
 export function LogIn({ onLogin }: { onLogin: Function }) {
   const [token, setToken] = useState<string>("22155370-f5e2-40bb-8e49-d733b1ab6d90");
@@ -48,7 +49,7 @@ export function LogIn({ onLogin }: { onLogin: Function }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    backgroundColor: "#000",
+    backgroundColor: Palette.logInBackgroundColor,
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   infoMessage: {
-    color: "#FFF",
+    color: Palette.logInInfoMessage,
     fontSize: 23,
     fontWeight: "bold",
     marginBottom: 60,
@@ -71,9 +72,9 @@ const styles = StyleSheet.create({
   },
   userInput: {
     alignSelf: "center",
-    backgroundColor: "#C2C2C2",
+    backgroundColor: Palette.inputBorderColor,
     borderRadius: 15,
-    borderColor: "#C2C2C2",
+    borderColor: Palette.inputBorderColor,
     borderWidth: 1,
     display: "flex",
     padding: 15,
@@ -81,7 +82,7 @@ const styles = StyleSheet.create({
   },
   logButton: {
     alignItems: "center",
-    backgroundColor: "#FFF",
+    backgroundColor: Palette.logInButtonBackgroundColor,
     borderRadius: 15,
     display: "flex",
     marginTop: 50,
@@ -89,7 +90,7 @@ const styles = StyleSheet.create({
     width: "70%",
   },
   logButtonText: {
-    color: "#000",
+    color: Palette.logInButtonFontColor,
   },
 });
 
