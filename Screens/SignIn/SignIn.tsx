@@ -1,17 +1,19 @@
 import { Image, Pressable, TextInput, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
-import { navigate } from '../../services/Services';
 
-export function SignIn({ onSignIn } : { onSignIn ?: Function }) {
-  const [userName, setUserName] = useState<string>();
+export function SignIn({ onSignIn } : { onSignIn : Function }) {
+  
+  const [userName, setUserName] = useState<string>('');
 
   const handleInput = (text: string) => {
     setUserName(text);
   };
 
   const handleSubmit = () => {
-    setUserName('');
-    // navigation.navigate('Home')
+    if (userName.trim() !== '') {
+      onSignIn(userName)
+      setUserName('')
+    }
   };
 
   return (
@@ -33,7 +35,7 @@ export function SignIn({ onSignIn } : { onSignIn ?: Function }) {
           />
           <Pressable
             style={styles.signButton}
-            onPress={() => navigate('Home')}
+            onPress={handleSubmit}
           >
             <Text style={styles.signButtonText}>Sign In</Text>
           </Pressable>
