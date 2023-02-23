@@ -1,5 +1,12 @@
 import { NavigationContainer } from "@react-navigation/native";
-import { StatusBar, StyleSheet, ToastAndroid, View } from "react-native";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StatusBar,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from "react-native";
 import { useState } from "react";
 import MainScreen from "./Screens/MainScreen";
 import LogIn from "./Screens/LogIn";
@@ -7,8 +14,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./Screens/Home";
 import SignIn from "./Screens/SignIn";
 import * as SecureStorage from "expo-secure-store";
-import { claimUser, navigate, navigationRef } from "./services/main.service";
-import { PilotData, PilotProfile } from "./Types/Types";
+import {
+  checkIfUserExists,
+  claimUser,
+  navigate,
+  navigationRef,
+} from "./services/main.service";
 import { getUserData } from "./services/main.service";
 
 const TOKEN_KEY = "pilotToken";
@@ -16,18 +27,21 @@ const TOKEN_KEY = "pilotToken";
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  const [pilotProfile, setPilotProfile] = useState<PilotProfile>();
+  const [userToken, setUserToken] = useState<string>();
 
   const handleSignIn = (username: string) => {
     const retrieveUser = async () => {
-      claimUser(username).then((userdata) => {
-        if (userdata !== null) {
-          setPilotProfile(userdata.user);
-          navigate("Home");
-        } else {
-          ToastAndroid.show("El usuario ya existe", ToastAndroid.BOTTOM);
-        }
-      }).catch((err) => console.log(err));
+      claimUser(username)
+        .then((userdata) => {
+          if (userdata !== null) {
+            setUserToken(userdata.token);
+            ToastAndroid.show("¡ Usuario encontrado !", ToastAndroid.BOTTOM);
+            navigate("Home");
+          } else {
+            ToastAndroid.show("El usuario ya existe", ToastAndroid.BOTTOM);
+          }
+        })
+        .catch((err) => console.log(err));
     };
 
     retrieveUser();
@@ -35,15 +49,19 @@ export default function App() {
 
   const handlelogin = (token: string) => {
     const retrieveData = async () => {
-      getUserData(token).then((userdata) => {
-        if (userdata !== null) {
-          setPilotProfile(userdata.user)
+      checkIfUserExists(token).then((exists) => {
+        if (exists) {
+          setUserToken(token);
+          ToastAndroid.show("¡ Bienvenido a SpaceTraders !", ToastAndroid.BOTTOM);
           navigate("Home");
         } else {
-          ToastAndroid.show("El token no corresponde a un usuario", ToastAndroid.BOTTOM);
+          ToastAndroid.show(
+            "El token no corresponde a un usuario válido",
+            ToastAndroid.BOTTOM
+          );
         }
-      })
-    }
+      });
+    };
 
     retrieveData();
   };
@@ -63,7 +81,7 @@ export default function App() {
           {() => <SignIn onSignIn={handleSignIn} />}
         </Stack.Screen>
         <Stack.Screen name="Home">
-          {() => <Home profile={pilotProfile} />}
+          {() => <Home userToken={userToken} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
@@ -71,6 +89,9 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
   backgroundColor: {
     backgroundColor: "#000",
   },

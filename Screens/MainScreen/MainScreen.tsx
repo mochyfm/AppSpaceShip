@@ -1,5 +1,6 @@
 import { StyleSheet, Pressable, Text, View, Image } from 'react-native';
 import { navigate } from '../../services/main.service'
+import { Palette } from '../../Themes/main.themes';
 
 export default function MainScreen({ navigation }: any) {
 
@@ -53,7 +54,7 @@ export default function MainScreen({ navigation }: any) {
 
 const styles = StyleSheet.create({
   backgroundImage: {
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: Palette.backgroundDefaultColor,
     height: '100%',
     width: '100%'
   },
@@ -78,7 +79,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   mainScreenText: {
-    color: '#FFF',
+    color: Palette.fontColor,
   },
   mainTitle: {
     fontSize: 25,
@@ -97,14 +98,14 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   logInButton: {
-    backgroundColor: '#DE8E2B',
+    backgroundColor: Palette.primaryColor,
     borderRadius: 15,
     padding: 50,
     paddingBottom: 10,
     paddingTop: 10,
   },
   logInButtonText: {
-    color: '#FFF',
+    color: Palette.fontColor,
     fontSize: 20,
   },
   signInBlock: {
@@ -113,12 +114,12 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   signInText: {
-    color: '#FFF',
+    color: Palette.fontColor,
     marginRight: 5,
   },
   signInLink: {},
   signInTextLink: {
-    color: '#FFF',
+    color: Palette.fontColor,
     fontWeight: 'bold',
     textDecorationLine: 'underline',
     textDecorationStyle: 'solid',

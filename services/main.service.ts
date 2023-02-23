@@ -1,6 +1,6 @@
  import { createNavigationContainerRef } from '@react-navigation/native';
 import axios from 'axios';
-import { PilotData, PilotErrorObject } from '../Types/Types';
+import { PilotLoginData, PilotSignData } from '../Types/Types';
 
 const API_MAIN_URL = 'https://api.spacetraders.io';
 
@@ -12,7 +12,7 @@ export function navigate(name : string) {
   }
 }
 
-export async function claimUser(username: string) : Promise<PilotData | null> {
+export async function claimUser(username: string) : Promise<PilotSignData | null> {
   return await axios.post(`${API_MAIN_URL}/users/${username}/claim`)
   .then((response) => {
     if (response.data.error_message) return null;
@@ -28,7 +28,7 @@ export async function claimUser(username: string) : Promise<PilotData | null> {
 }
 
 /* Tokens en drive */
-export async function getUserData(token: string) : Promise<PilotData | null> {
+export async function getUserData(token: string) : Promise<PilotLoginData> {
   return await axios.get(`${API_MAIN_URL}/my/account/?token=${token}`)
   .then((response) => {
     if (response.data.error_message) console.log(response.data.error_message);
@@ -38,5 +38,16 @@ export async function getUserData(token: string) : Promise<PilotData | null> {
     console.log(error);
   });
 }
+
+export async function checkIfUserExists(token: string) : Promise<boolean> {
+  return await axios.get(`${API_MAIN_URL}/my/account/?token=${token}`)
+  .then((response) => {
+    return response.data !== null;
+  })
+  .catch((error) => {
+    return false;
+  });
+}
+
 
 
