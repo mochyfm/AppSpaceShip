@@ -9,6 +9,7 @@ import SignIn from "./Screens/SignIn";
 import * as SecureStorage from "expo-secure-store";
 import { claimUser, navigate, navigationRef } from "./services/main.service";
 import { PilotData, PilotProfile } from "./Types/Types";
+import { getUserData } from "./services/main.service";
 
 const TOKEN_KEY = "pilotToken";
 
@@ -33,7 +34,18 @@ export default function App() {
   };
 
   const handlelogin = (token: string) => {
-    console.log(token);
+    const retrieveData = async () => {
+      getUserData(token).then((userdata) => {
+        if (userdata !== null) {
+          setPilotProfile(userdata.user)
+          navigate("Home");
+        } else {
+          ToastAndroid.show("El token no corresponde a un usuario", ToastAndroid.BOTTOM);
+        }
+      })
+    }
+
+    retrieveData();
   };
 
   return (
