@@ -12,7 +12,14 @@ import * as RootNavigation from "../../services/main.service";
 import { Palette } from "../../Themes/main.themes";
 
 export function LogIn({ onLogin }: { onLogin: Function }) {
+  
   const [token, setToken] = useState<string>("");
+  /**
+   * Sé que me vas a decir que esto es una mala práctica, pero te dejo un token de prueba aquí.
+   * El token es de una cuenta random, no te preocupes. Te lo dejo por si lo quieres poner como "default" del login.
+   * 
+   * 3d00a99a-7210-4c14-82d1-9c213828741b
+   */
 
   const handleInput = (token: string): void => {
     setToken(token);
