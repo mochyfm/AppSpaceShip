@@ -1,36 +1,36 @@
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PilotProfileData } from "../../../Types/Types";
 import Loading from "../../../Components/Loading";
 import { Palette } from "../../../Themes/main.themes";
 import { LinearGradient } from "expo-linear-gradient";
+import { getUserData } from "../../../services/main.service";
+import GradientBackground from "../../../Components/GradientBackground";
 
 export function Profile({
-  userData,
-  isLoading,
+  token,
 }: {
-  isLoading: boolean;
-  userData?: PilotProfileData;
+  token ?: string;
 }) {
-  const [showLoans, setShowLoans] = useState<boolean>();
-  const renderDate = (date?: string): string | null => {
-    return date ? date.substring(0, 10) : null;
-  };
 
-  console.log(userData);
+  const [isLoading, setLoading] = useState<boolean>(true);
+  const [userData, setUserData] = useState<PilotProfileData>();
+
+  useEffect(() => {
+    setLoading(true);
+
+    const fetchForUserData = async (token: string) => {
+      const data = await getUserData(token);
+      data && setUserData(data.user);
+      setLoading(false);
+    };
+
+    token && fetchForUserData(token);
+  }, [token]);
 
   return (
     <Loading isLoading={isLoading}>
-      <LinearGradient
-        colors={[
-          Palette.degradedColorDarker,
-          Palette.degradedColorLigther,
-          Palette.degradedColorDarker,
-        ]}
-        start={{ x: 0, y: 2 }}
-        end={{ x: 10, y: 2 }}
-        style={styles.profileContainer}
-      >
+      <GradientBackground>
         <View style={styles.profileBlock}>
           <View style={styles.profileHeader}>
             <Image
@@ -49,7 +49,7 @@ export function Profile({
                   styles.profileBodyImage,
                   styles.profileCoinImageAdjustment,
                 ]}
-                source={require("./assets/galacticCreditv2.gif")}
+                source={require("./assets/galacticCredit.gif")}
               />
             </View>
             <View style={styles.profileInfoBlock}>
@@ -70,17 +70,12 @@ export function Profile({
             </View>
           </View>
         </View>
-      </LinearGradient>
+      </GradientBackground>
     </Loading>
   );
 }
 
 const styles = StyleSheet.create({
-  profileContainer: {
-    backgroundColor: "#000",
-    display: "flex",
-    height: "100%",
-  },
   profileBlock: {
     backgroundColor: Palette.drawerBackgroundColor,
     borderBottomColor: Palette.drawerFontColor,
