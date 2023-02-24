@@ -1,43 +1,51 @@
 export const Palette = {
-    
-    backgroundDefaultColor: '#000',
-    loadingColor: '#FFF',
-    
-    logInBackgroundColor: '#000',
-    logInInfoMessage: '#FFF',
-    logInButtonBackgroundColor: '#FFF',
-    logInButtonFontColor: '#000',
+  backgroundDefaultColor: "#000",
+  loadingColor: "#FFF",
 
-    signInBackgroundColor: '#FFF',
-    signInInfoMessage: '#000',
-    signInButtonBackgroundColor: '#000',
-    signInButtonFontColor: '#FFF',
+  logInBackgroundColor: "#000",
+  logInInfoMessage: "#FFF",
+  logInButtonBackgroundColor: "#FFF",
+  logInButtonFontColor: "#000",
 
-    inputBorderColor: '#C2C2C2',
-    fontColor: '#FFF',
-    
-    profileCardBackground: '#C2C2C2',
-    profileBodybackgroundColor: '#19002c',
-    profileBodyColor: '#FFF',
+  signInBackgroundColor: "#FFF",
+  signInInfoMessage: "#000",
+  signInButtonBackgroundColor: "#000",
+  signInButtonFontColor: "#FFF",
 
-    headerBackgroundColor: '#19002c',
-    headerFontColor: '#FFF',
+  logOutButtonBackgroundColor: "#FFF",
+  logOutButtonBorderColor: "#FFF",
+  logOutButtonTextColor: "#19002c",
 
-    drawerBackgroundColor: '#19002c',
-    drawerFontColor: '#FFF',
-    drawerActiveColor: '#FF0000',
+  inputBorderColor: "#C2C2C2",
+  fontColor: "#FFF",
 
-    degradedColorLigther: '#e7075c',
-    degradedColorDarker: '#19002c',
+  profileCardBackground: "#C2C2C2",
+  profileBodybackgroundColor: "#19002c",
+  profileBodyColor: "#FFF",
 
-    loanCardBackgroundColor: '#19002c',
-    loanCardBorderColor: '#7D59BD',
-    loanCardInfoTagColor: '#7D59BD',
-    loanCardValueColor: '#FFF',     
+  headerBackgroundColor: "#19002c",
+  headerFontColor: "#FFF",
 
-    loanButtonBackgroundColor: '#7D59BD',
-    loanButtonBorderColor: '#19002c',
-    loanButtonColor: '#19002c',
+  drawerBackgroundColor: "#19002c",
+  drawerFontColor: "#FFF",
+  drawerActiveColor: "#FF0000",
 
-    primaryColor: '#DE8E2B'
-}
+  degradedColorLigther: "#e7075c",
+  degradedColorDarker: "#19002c",
+
+  loanCardBackgroundColor: "#19002c",
+  loanCardBorderColor: "#7D59BD",
+  loanCardInfoTagColor: "#7D59BD",
+  loanCardValueColor: "#FFF",
+
+  shipCardBackgroundColor: "#19002c",
+  shipCardBorderColor: "#7D59BD",
+  shipCardInfoTagColor: "#7D59BD",
+  shipCardValueColor: "#FFF",
+
+  loanButtonBackgroundColor: "#7D59BD",
+  loanButtonBorderColor: "#19002c",
+  loanButtonColor: "#19002c",
+
+  primaryColor: "#DE8E2B",
+};

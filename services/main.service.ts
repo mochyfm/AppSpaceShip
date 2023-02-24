@@ -1,8 +1,9 @@
 import { createNavigationContainerRef } from "@react-navigation/native";
 import axios from "axios";
-import { AvailableLoan, PilotLoginData, PilotSignData } from "../Types/Types";
+import { AvailableLoan, PilotLoginData, PilotSignData, Ship } from "../Types/Types";
 
 const API_MAIN_URL = "https://api.spacetraders.io";
+export const TOKEN_KEY = "userToken";
 
 export const navigationRef = createNavigationContainerRef();
 
@@ -67,6 +68,18 @@ export async function getAvailableLoans(
     .catch((error) => {
       console.log(error);
     });
+}
+
+export async function getShips(
+  token: string
+): Promise<Ship[]> {
+  return await axios.get(`${API_MAIN_URL}/systems/OE/ship-listings?token=${token}`)
+  .then((response) => {
+    if (response.data.error_message) return null;
+    else return response.data.shipListings;
+  }).catch((error) => {
+    return null
+  });
 }
 
 export async function requestLoanByType(
