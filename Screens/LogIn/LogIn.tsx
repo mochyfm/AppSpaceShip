@@ -4,6 +4,7 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ToastAndroid,
   View,
 } from "react-native";
 import { useState } from "react";
@@ -11,7 +12,7 @@ import * as RootNavigation from "../../services/main.service";
 import { Palette } from "../../Themes/main.themes";
 
 export function LogIn({ onLogin }: { onLogin: Function }) {
-  const [token, setToken] = useState<string>("22155370-f5e2-40bb-8e49-d733b1ab6d90");
+  const [token, setToken] = useState<string>("");
 
   const handleInput = (token: string): void => {
     setToken(token);
@@ -19,9 +20,9 @@ export function LogIn({ onLogin }: { onLogin: Function }) {
 
   const handleSubmit = (): void => {
     if (token.trim() !== "") {
-      onLogin(token)
-      setToken('')
-    }
+      onLogin(token);
+      setToken("");
+    } else ToastAndroid.show("Escriba un token válido.", ToastAndroid.BOTTOM);
   };
 
   return (

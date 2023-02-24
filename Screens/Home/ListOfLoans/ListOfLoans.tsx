@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, ToastAndroid } from "react-native";
 import React, { useEffect, useState } from "react";
 import Loading from "../../../Components/Loading";
 import {
@@ -10,7 +10,7 @@ import LoanCard from "../../../Components/LoanCard";
 import { AvailableLoan } from "../../../Types/Types";
 import GradientBackground from "../../../Components/GradientBackground";
 
-const ListOfLoans = ({ token }: { token?: string }) => {
+const ListOfLoans = ({ token }: { token?: string | null }) => {
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const [loans, setLoans] = useState<AvailableLoan[]>();
@@ -22,9 +22,9 @@ const ListOfLoans = ({ token }: { token?: string }) => {
     ): Promise<void> => {
       requestLoanByType(userToken, typeOfLoan).then((condition) => {
         if (!condition) {
-          console.log("Este préstamo ya ha sido adquirido")
+          ToastAndroid.show("Este préstamo ya ha sido adquirido", ToastAndroid.BOTTOM);
         } else {
-          console.log("Préstamo adquirido correctamente");
+          ToastAndroid.show("Préstamo adquirido correctamente", ToastAndroid.BOTTOM);
           navigate('Profile')
         }
       });

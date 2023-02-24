@@ -1,11 +1,6 @@
 import { NavigationContainer } from "@react-navigation/native";
-import {
-  StatusBar,
-  StyleSheet,
-  ToastAndroid,
-  View,
-} from "react-native";
-import { useState } from "react";
+import { StatusBar, StyleSheet, ToastAndroid, View } from "react-native";
+import { useCallback, useState } from "react";
 import MainScreen from "./Screens/MainScreen";
 import LogIn from "./Screens/LogIn";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -22,9 +17,10 @@ import {
 export default function App() {
   const Stack = createNativeStackNavigator();
 
-  const [userToken, setUserToken] = useState<string>();
+  const [userToken, setUserToken] = useState<string | null>('');
 
   const handleSignIn = (username: string) => {
+    console.log(username);
     const checkIfUserIsTaken = async () => {
       claimUser(username)
         .then((userdata) => {
@@ -39,15 +35,19 @@ export default function App() {
         .catch((err) => console.log(err));
     };
 
-    userToken === undefined && checkIfUserIsTaken();
+    userToken === '' && checkIfUserIsTaken();
   };
 
   const handlelogin = (token: string) => {
     const retrieveDataWithToken = async () => {
       checkIfUserExists(token).then((exists) => {
+        console.log(token);
         if (exists) {
           setUserToken(token);
-          ToastAndroid.show("¡ Bienvenido a SpaceTraders !", ToastAndroid.BOTTOM);
+          ToastAndroid.show(
+            "¡ Bienvenido a SpaceTraders !",
+            ToastAndroid.BOTTOM
+          );
           navigate("Home");
         } else {
           ToastAndroid.show(
@@ -58,7 +58,7 @@ export default function App() {
       });
     };
 
-    userToken === undefined && retrieveDataWithToken();
+    userToken === '' && retrieveDataWithToken();
   };
 
   return (

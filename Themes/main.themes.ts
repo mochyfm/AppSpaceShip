@@ -35,6 +35,11 @@ export const Palette = {
     loanCardInfoTagColor: '#7D59BD',
     loanCardValueColor: '#FFF',     
 
+    shipCardBackgroundColor: '#19002c',
+    shipCardBorderColor: '#7D59BD',
+    shipCardInfoTagColor: '#7D59BD',
+    shipCardValueColor: '#FFF',   
+
     loanButtonBackgroundColor: '#7D59BD',
     loanButtonBorderColor: '#19002c',
     loanButtonColor: '#19002c',

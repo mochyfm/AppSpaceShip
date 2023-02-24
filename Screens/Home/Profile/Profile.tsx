@@ -10,12 +10,29 @@ import GradientBackground from "../../../Components/GradientBackground";
 export function Profile({
   token,
 }: {
-  token ?: string;
+  token ?: string | null;
 }) {
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const [userData, setUserData] = useState<PilotProfileData>();
 
+  /**
+   * He estado buscando, y según parece existe un componente llamado
+   * "useFocusEffect", originario de la propia libreria de @react-navigation.
+   * 
+   * Mi problema es que he intentado utilizar este componente, y al intentar probarlo
+   * no comenté la opción del getUserData() -> (La petición asíncrona a la api). 
+   * Y agoté el número de peticiones diarias - Esto a dia 24/02/2023 a las 20:34 siendo la entrega
+   * el día 25 a las 14:15. 
+   * 
+   * Aun así, he conseguido que me dejase pedir, pero no he conseguido hacer que con el useFocusEffect
+   * pueda recargar los datos desde el token cuando se hace "focus" a este componente. La documentación
+   * que he seguido es la siguiente: https://reactnavigation.org/docs/use-focus-effect/ 
+   * 
+   * PD: La api responde muy lento, refiriendome a que tarda sus 8 - 10 segundos en darme el perfil desde
+   * el login o el sign. 
+   * 
+   */
   useEffect(() => {
     setLoading(true);
 
