@@ -2,7 +2,13 @@ import { StyleSheet, Pressable, Text, View, Image } from 'react-native';
 import { navigate } from '../../services/main.service'
 import { Palette } from '../../Themes/main.themes';
 
-export default function MainScreen({ navigation }: any) {
+export default function MainScreen({ storedToken } : { storedToken : boolean }) {
+
+  const handleNavigate = (name : string) => {
+    if (storedToken) {
+      navigate('Home')
+    } else navigate(name)
+  }
 
   return (
     <>
@@ -29,7 +35,7 @@ export default function MainScreen({ navigation }: any) {
           <View>
             <Pressable
               style={styles.logInButton}
-              onPress={() => navigate('LogIn')}
+              onPress={() => handleNavigate('LogIn')}
             >
               <View>
                 <Text style={styles.logInButtonText}>Log In</Text>
@@ -40,7 +46,7 @@ export default function MainScreen({ navigation }: any) {
             <View>
               <Text style={styles.signInText}>You dont have an account?</Text>
             </View>
-            <Pressable style={styles.signInLink} onPress={() => navigation.navigate('SignIn')}>
+            <Pressable style={styles.signInLink} onPress={() => navigate('SignIn')}>
               <View>
                 <Text style={styles.signInTextLink}>Sign In</Text>
               </View>

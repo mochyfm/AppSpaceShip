@@ -3,6 +3,7 @@ import axios from "axios";
 import { AvailableLoan, PilotLoginData, PilotSignData, Ship } from "../Types/Types";
 
 const API_MAIN_URL = "https://api.spacetraders.io";
+export const TOKEN_KEY = "userToken";
 
 export const navigationRef = createNavigationContainerRef();
 
