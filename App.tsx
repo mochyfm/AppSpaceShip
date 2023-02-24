@@ -1,7 +1,5 @@
 import { NavigationContainer } from "@react-navigation/native";
 import {
-  KeyboardAvoidingView,
-  Platform,
   StatusBar,
   StyleSheet,
   ToastAndroid,
@@ -20,9 +18,6 @@ import {
   navigate,
   navigationRef,
 } from "./services/main.service";
-import { getUserData } from "./services/main.service";
-
-const TOKEN_KEY = "pilotToken";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -30,12 +25,12 @@ export default function App() {
   const [userToken, setUserToken] = useState<string>();
 
   const handleSignIn = (username: string) => {
-    const retrieveUser = async () => {
+    const checkIfUserIsTaken = async () => {
       claimUser(username)
         .then((userdata) => {
           if (userdata !== null) {
             setUserToken(userdata.token);
-            ToastAndroid.show("¡ Usuario encontrado !", ToastAndroid.BOTTOM);
+            ToastAndroid.show("¡ Usuario creado !", ToastAndroid.BOTTOM);
             navigate("Home");
           } else {
             ToastAndroid.show("El usuario ya existe", ToastAndroid.BOTTOM);
@@ -44,11 +39,11 @@ export default function App() {
         .catch((err) => console.log(err));
     };
 
-    retrieveUser();
+    userToken === undefined && checkIfUserIsTaken();
   };
 
   const handlelogin = (token: string) => {
-    const retrieveData = async () => {
+    const retrieveDataWithToken = async () => {
       checkIfUserExists(token).then((exists) => {
         if (exists) {
           setUserToken(token);
@@ -63,7 +58,7 @@ export default function App() {
       });
     };
 
-    retrieveData();
+    userToken === undefined && retrieveDataWithToken();
   };
 
   return (
@@ -81,7 +76,7 @@ export default function App() {
           {() => <SignIn onSignIn={handleSignIn} />}
         </Stack.Screen>
         <Stack.Screen name="Home">
-          {() => <Home userToken={userToken} />}
+          {() => <Home userToken={userToken} setUserToken={setUserToken} />}
         </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

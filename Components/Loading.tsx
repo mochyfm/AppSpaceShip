@@ -1,5 +1,7 @@
 import { View, Text, ActivityIndicator } from "react-native";
 import React from "react";
+import { Palette } from "../Themes/main.themes";
+import GradientBackground from "./GradientBackground";
 
 interface Props {
   isLoading: boolean;
@@ -12,9 +14,20 @@ interface Props {
 const Loading: React.FC<Props> = ({ isLoading, children }) => {
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <ActivityIndicator size="large" color="#FF0000" />
-      </View>
+      <GradientBackground>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ActivityIndicator
+            size="large"
+            color={Palette.loadingColor}
+          />
+        </View>
+      </GradientBackground>
     );
   }
 

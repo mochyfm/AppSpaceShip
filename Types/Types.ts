@@ -1,59 +1,69 @@
-export type PilotSignData = {
+export interface PilotSignData {
   token: string;
   user: {
     credits: number;
-    loans: Loan[];
+    loans: CurrentLoan[];
     ships: Ship[];
     username: string;
   };
-};
+}
 
-export type PilotLoginData = {
+export interface PilotLoginData {
   user: PilotProfileData;
-};
+}
 
-export type PilotProfileData = {
+export interface PilotProfileData {
   credits: number;
   joinedAt: string;
   shipCount: number;
   structureCount: number;
   username: string;
-};
+}
 
-export type Loan = {
-  credits: number;
-  loan: {
-    due: string;
-    id: string;
-    repaymentAmount: number;
-    status: string;
-    type: string;
-  };
-};
+export interface AvailableLoan {
+  amount: number;
+  collateralRequired: boolean;
+  rate: number;
+  termInDays: number;
+  type: string;
+}
 
-export type Ship = {
-  cargo: Cargo[];
-  class: string;
+export interface CurrentLoan {
+  due: string;
   id: string;
-  location: string;
-  manufacture: string;
+  repaymentAmount: number;
+  status: string;
+  type: string;
+}
+
+export interface Ship {
+  class: string;
+  manufacturer: string;
   maxCargo: number;
   plating: number;
-  spaceAvailable: number;
+  purchaseLocation: SpaceLocation[]
   speed: number;
   type: string;
-  weapons: number;
-  x: number;
-  y: number;
-};
+}
 
-export type Cargo = {
+interface SpaceLocation {
+  location: string;
+  price: number;
+}
+
+export interface TakenLoan {
+  credits: number,
+  loan: {
+    due: Date,
+    id: string
+    repaymentAmount: number,
+    status: string,
+    type: string
+  }
+}
+
+export interface Cargo {
   good: string;
   quantity: number;
   totalVolume: 20;
-};
-
-export interface LogOutHeaderProps {
-  navigation: any;
-  handleLogout: () => void;
 }

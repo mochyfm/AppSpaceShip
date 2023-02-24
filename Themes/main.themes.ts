@@ -1,6 +1,7 @@
 export const Palette = {
     
     backgroundDefaultColor: '#000',
+    loadingColor: '#FFF',
     
     logInBackgroundColor: '#000',
     logInInfoMessage: '#FFF',
@@ -18,7 +19,6 @@ export const Palette = {
     profileCardBackground: '#C2C2C2',
     profileBodybackgroundColor: '#19002c',
     profileBodyColor: '#FFF',
-    profileStatsBody: '#364598',
 
     headerBackgroundColor: '#19002c',
     headerFontColor: '#FFF',
@@ -29,6 +29,15 @@ export const Palette = {
 
     degradedColorLigther: '#e7075c',
     degradedColorDarker: '#19002c',
+
+    loanCardBackgroundColor: '#19002c',
+    loanCardBorderColor: '#7D59BD',
+    loanCardInfoTagColor: '#7D59BD',
+    loanCardValueColor: '#FFF',     
+
+    loanButtonBackgroundColor: '#7D59BD',
+    loanButtonBorderColor: '#19002c',
+    loanButtonColor: '#19002c',
 
     primaryColor: '#DE8E2B'
 }

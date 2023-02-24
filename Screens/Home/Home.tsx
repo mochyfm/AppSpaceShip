@@ -1,29 +1,17 @@
-import {
-  DrawerContentComponentProps,
-  createDrawerNavigator,
-} from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import Profile from "./Profile";
-import { useEffect, useState } from "react";
-import { PilotLoginData, PilotProfileData } from "../../Types/Types";
-import { getUserData } from "../../services/main.service";
 import { Palette } from "../../Themes/main.themes";
+import ListOfLoans from "./ListOfLoans";
+import ListOfShips from "./ListOfShips/ListOfShips";
 
-export function Home({ userToken }: { userToken?: string }) {
+export function Home({
+  userToken,
+  setUserToken,
+}: {
+  userToken?: string;
+  setUserToken: React.Dispatch<React.SetStateAction<string | undefined>>;
+}) {
   const Drawer = createDrawerNavigator();
-  const [userData, setUserData] = useState<PilotProfileData>();
-  const [isLoading, setLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setLoading(true);
-
-    const fetchForUserData = async (token: string) => {
-      const data = await getUserData(token);
-      data && setUserData(data.user);
-      setLoading(false);
-    };
-
-    userToken && fetchForUserData(userToken);
-  }, [userToken]);
 
   return (
     <Drawer.Navigator
@@ -41,10 +29,17 @@ export function Home({ userToken }: { userToken?: string }) {
           backgroundColor: Palette.drawerBackgroundColor,
         },
         drawerActiveTintColor: Palette.fontColor,
+        drawerInactiveTintColor: Palette.fontColor,
       }}
     >
       <Drawer.Screen name="Profile">
-        {() => <Profile isLoading={isLoading} userData={userData} />}
+        {() => <Profile token={userToken} />}
+      </Drawer.Screen>
+      <Drawer.Screen name="Loans">
+        {() => <ListOfLoans token={userToken} />}
+      </Drawer.Screen>
+      <Drawer.Screen name="Ships">
+        {() => <ListOfShips token={userToken} />}
       </Drawer.Screen>
     </Drawer.Navigator>
   );
