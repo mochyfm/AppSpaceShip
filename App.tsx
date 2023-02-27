@@ -72,7 +72,7 @@ export default function App() {
       });
     };
 
-    userToken?.trim() === "" || userToken === null && retrieveDataWithToken();
+    userToken?.trim() !== "" || userToken !== null && retrieveDataWithToken();
   };
 
   return (
